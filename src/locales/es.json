@@ -55,7 +55,33 @@
     "retry": "Reintentar",
     "save": "Guardar",
     "cancel": "Cancelar",
-    "select": "Seleccionar"
+    "select": "Seleccionar",
+    "ok": "OK",
+    "not_now": "Ahora no",
+    "enabling": "Activando..."
+  },
+  "notifications": {
+    "success": {
+      "title": "Notificaciones Activadas",
+      "message": "¡Ahora recibirás recordatorios sobre las recogidas!"
+    },
+    "permission_denied": {
+      "title": "Permiso Denegado",
+      "message": "Por favor, activa las notificaciones en la configuración del dispositivo para recibir recordatorios de recogida."
+    },
+    "error": {
+      "message": "Error al activar notificaciones. Inténtalo de nuevo."
+    },
+    "enabled": {
+      "title": "Notificaciones Activadas",
+      "description": "Recibirás recordatorios sobre los próximos días de recogida de basura."
+    },
+    "opt_in": {
+      "title": "Activar Notificaciones",
+      "description": "Recibe recordatorios sobre los próximos días de recogida de basura. Te enviaremos una notificación el día anterior a la recogida."
+    },
+    "enable": "Activar Notificaciones",
+    "disable": "Desactivar Notificaciones"
   }
 }
 

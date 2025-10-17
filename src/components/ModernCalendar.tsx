@@ -71,10 +71,14 @@ export function ModernCalendar({
           endingDay: true,
           color: primaryColor,
           textColor: '#ffffff',
-          // Add a white stroke/border for today to make it more evident
+          // Make today SUPER evident with multiple indicators
           selected: isCurrentDay,
           selectedColor: isCurrentDay ? '#ffffff' : primaryColor,
           selectedTextColor: isCurrentDay ? '#000000' : '#ffffff',
+          // Add multiple visual indicators for today
+          marked: isCurrentDay,
+          dotColor: isCurrentDay ? '#ff0000' : undefined, // Red dot for today
+          dotSize: isCurrentDay ? 10 : undefined, // Larger dot
         };
       } else {
         markedDates[dateString] = {
@@ -303,23 +307,23 @@ export function ModernCalendar({
             'stylesheet.day.basic': {
               today: {
                 backgroundColor: '#3b82f6',
-                borderRadius: 20,
-                width: 36,
-                height: 36,
+                borderRadius: 25,
+                width: 50,
+                height: 50,
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderWidth: 2,
-                borderColor: '#ffffff',
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.3,
-                shadowRadius: 4,
-                elevation: 5,
+                borderWidth: 6,
+                borderColor: '#ff0000', // Red border for today
+                shadowColor: '#ff0000',
+                shadowOffset: { width: 0, height: 6 },
+                shadowOpacity: 0.8,
+                shadowRadius: 12,
+                elevation: 12,
               },
               todayText: {
                 color: '#ffffff',
                 fontWeight: 'bold',
-                fontSize: 16,
+                fontSize: 20,
               },
               base: {
                 width: 36,

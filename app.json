@@ -2,7 +2,7 @@
   "expo": {
     "name": "Dia do Lixo",
     "slug": "dia-do-lixo",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -50,7 +50,12 @@
     "scheme": "diadolixo",
     "extra": {
       "supabaseUrl": "https://qhohpvecomcqdzfhhzwj.supabase.co",
-      "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFob2hwdmVjb21jcWR6ZmhoendqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2OTkwNDcsImV4cCI6MjA3NjI3NTA0N30.xshWcVLEjrHfMBerwjgbkPKjOE-RGl3TX7iIdN2eBdg"
-    }
+      "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFob2hwdmVjb21jcWR6ZmhoendqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2OTkwNDcsImV4cCI6MjA3NjI3NTA0N30.xshWcVLEjrHfMBerwjgbkPKjOE-RGl3TX7iIdN2eBdg",
+      "router": {},
+      "eas": {
+        "projectId": "b02c1846-f8e4-4e55-9bd0-5f6ccb647080"
+      }
+    },
+    "owner": "gflourenco"
   }
 }

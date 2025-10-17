@@ -6,4 +6,5 @@ export { LanguageSelector } from './LanguageSelector';
 export { CitySelector } from './CitySelector';
 export { ZoneSelector } from './ZoneSelector';
 export { LocationHeader } from './LocationHeader';
+export { NotificationOptIn } from './NotificationOptIn';
 

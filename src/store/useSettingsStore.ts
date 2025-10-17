@@ -36,12 +36,14 @@ export const useSettingsStore = create<SettingsStore>((set, get) => ({
     const { notificationsEnabled } = get();
     set({ zoneId });
     
-    // If notifications are enabled and we have a zone, update the device token
+    // If notifications are enabled and we have a zone, store/update the device token
     if (notificationsEnabled && zoneId) {
       try {
         const token = await AsyncStorage.getItem('device-token');
         if (token) {
-          await notificationService.updateDeviceTokenZone(token, zoneId);
+          // Store the device token with the zone in the database
+          await notificationService.storeDeviceToken(token, zoneId);
+          console.log('Device token stored with zone:', zoneId);
         }
       } catch (error) {
         console.error('Error updating device token zone:', error);
@@ -52,19 +54,26 @@ export const useSettingsStore = create<SettingsStore>((set, get) => ({
     set({ notificationsEnabled });
     
     try {
-      const token = await AsyncStorage.getItem('device-token');
-      if (!token) {
-        console.log('No device token available');
-        return;
-      }
-
       if (notificationsEnabled) {
-        await notificationService.enableNotifications(token);
+        // Register for push notifications and get token
+        const token = await notificationService.registerForPushNotifications();
+        if (token) {
+          // Store the token locally for now (zone will be set when user selects a zone)
+          await AsyncStorage.setItem('device-token', token);
+          console.log('Notification token registered and stored locally');
+        }
       } else {
-        await notificationService.disableNotifications(token);
+        // Get existing token and disable notifications
+        const token = await AsyncStorage.getItem('device-token');
+        if (token) {
+          await notificationService.disableNotifications(token);
+        }
       }
     } catch (error) {
       console.error('Error updating notification settings:', error);
+      // Revert the state if there was an error
+      set({ notificationsEnabled: !notificationsEnabled });
+      throw error;
     }
   },
   setLanguage: (language) => set({ language }),

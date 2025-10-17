@@ -55,7 +55,33 @@
     "retry": "Tentar novamente",
     "save": "Guardar",
     "cancel": "Cancelar",
-    "select": "Selecionar"
+    "select": "Selecionar",
+    "ok": "OK",
+    "not_now": "Agora não",
+    "enabling": "A ativar..."
+  },
+  "notifications": {
+    "success": {
+      "title": "Notificações Ativadas",
+      "message": "Agora receberá lembretes sobre as recolhas!"
+    },
+    "permission_denied": {
+      "title": "Permissão Negada",
+      "message": "Por favor, ative as notificações nas definições do dispositivo para receber lembretes de recolha."
+    },
+    "error": {
+      "message": "Falha ao ativar notificações. Tente novamente."
+    },
+    "enabled": {
+      "title": "Notificações Ativadas",
+      "description": "Receberá lembretes sobre os próximos dias de recolha de lixo."
+    },
+    "opt_in": {
+      "title": "Ativar Notificações",
+      "description": "Receba lembretes sobre os próximos dias de recolha de lixo. Enviaremos uma notificação no dia anterior à recolha."
+    },
+    "enable": "Ativar Notificações",
+    "disable": "Desativar Notificações"
   }
 }
 

@@ -93,19 +93,29 @@ class NotificationServiceImpl implements NotificationService {
       }
 
       if (existingToken) {
-        // Update existing token with new zone
+        // Update existing token with new zone (only if zoneId is provided)
+        const updateData: any = {
+          notifications_enabled: true,
+          device_id: deviceId,
+        };
+        
+        if (zoneId && zoneId !== '') {
+          updateData.zone_id = zoneId;
+        }
+
         const { error: updateError } = await supabase
           .from('device_tokens')
-          .update({
-            zone_id: zoneId,
-            notifications_enabled: true,
-            device_id: deviceId,
-          })
+          .update(updateData)
           .eq('token', token);
 
         if (updateError) throw updateError;
       } else {
-        // Insert new token
+        // Insert new token (only if zoneId is provided)
+        if (!zoneId || zoneId === '') {
+          console.log('No zone ID provided, storing token without zone association');
+          return;
+        }
+
         const { error: insertError } = await supabase
           .from('device_tokens')
           .insert({
