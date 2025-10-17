@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "Garbage Day",
+    "tagline": "Stay informed about waste collection"
+  },
+  "navigation": {
+    "calendar": "Calendar",
+    "settings": "Settings"
+  },
+  "calendar": {
+    "title": "Collection Calendar",
+    "today": "Today",
+    "noCollection": "No collection today",
+    "week": "Week"
+  },
+  "settings": {
+    "title": "Settings",
+    "city": {
+      "title": "City",
+      "placeholder": "Select your city"
+    },
+    "zone": {
+      "title": "Zone",
+      "placeholder": "Select your zone"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Receive notifications the day before collection",
+      "enabled": "Enabled",
+      "disabled": "Disabled"
+    },
+    "language": {
+      "title": "Language",
+      "placeholder": "Select language"
+    }
+  },
+  "garbage": {
+    "papel": "Paper/Cardboard",
+    "embalagens": "Packaging",
+    "bioresiduos": "Organic Waste",
+    "indiferenciados": "Mixed Waste"
+  },
+  "days": {
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "save": "Save",
+    "cancel": "Cancel",
+    "select": "Select"
+  }
+}
+

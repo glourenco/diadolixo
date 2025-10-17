@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "Dia do Lixo",
+    "tagline": "Informe-se sobre a recolha de resíduos"
+  },
+  "navigation": {
+    "calendar": "Calendário",
+    "settings": "Definições"
+  },
+  "calendar": {
+    "title": "Calendário de Recolha",
+    "today": "Hoje",
+    "noCollection": "Sem recolha hoje",
+    "week": "Semana"
+  },
+  "settings": {
+    "title": "Definições",
+    "city": {
+      "title": "Cidade",
+      "placeholder": "Selecione a sua cidade"
+    },
+    "zone": {
+      "title": "Zona",
+      "placeholder": "Selecione a sua zona"
+    },
+    "notifications": {
+      "title": "Notificações",
+      "description": "Receber notificações no dia anterior à recolha",
+      "enabled": "Ativado",
+      "disabled": "Desativado"
+    },
+    "language": {
+      "title": "Idioma",
+      "placeholder": "Selecione o idioma"
+    }
+  },
+  "garbage": {
+    "papel": "Papel/Cartão",
+    "embalagens": "Embalagens",
+    "bioresiduos": "Biorresíduos",
+    "indiferenciados": "Indiferenciados"
+  },
+  "days": {
+    "sunday": "Domingo",
+    "monday": "Segunda",
+    "tuesday": "Terça",
+    "wednesday": "Quarta",
+    "thursday": "Quinta",
+    "friday": "Sexta",
+    "saturday": "Sábado"
+  },
+  "common": {
+    "loading": "A carregar...",
+    "error": "Erro",
+    "retry": "Tentar novamente",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "select": "Selecionar"
+  }
+}
+

@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "Día de la Basura",
+    "tagline": "Mantente informado sobre la recogida de residuos"
+  },
+  "navigation": {
+    "calendar": "Calendario",
+    "settings": "Configuración"
+  },
+  "calendar": {
+    "title": "Calendario de Recogida",
+    "today": "Hoy",
+    "noCollection": "Sin recogida hoy",
+    "week": "Semana"
+  },
+  "settings": {
+    "title": "Configuración",
+    "city": {
+      "title": "Ciudad",
+      "placeholder": "Selecciona tu ciudad"
+    },
+    "zone": {
+      "title": "Zona",
+      "placeholder": "Selecciona tu zona"
+    },
+    "notifications": {
+      "title": "Notificaciones",
+      "description": "Recibir notificaciones el día antes de la recogida",
+      "enabled": "Activado",
+      "disabled": "Desactivado"
+    },
+    "language": {
+      "title": "Idioma",
+      "placeholder": "Selecciona idioma"
+    }
+  },
+  "garbage": {
+    "papel": "Papel/Cartón",
+    "embalagens": "Envases",
+    "bioresiduos": "Biorresiduos",
+    "indiferenciados": "Indiferenciados"
+  },
+  "days": {
+    "sunday": "Domingo",
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miércoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábado"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "retry": "Reintentar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "select": "Seleccionar"
+  }
+}
+
