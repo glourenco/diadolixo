@@ -2,7 +2,7 @@
   "expo": {
     "name": "Dia do Lixo",
     "slug": "dia-do-lixo",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

@@ -27,16 +27,16 @@ export function GarbageTypeCard({ garbageType, compact = false }: GarbageTypeCar
   };
 
   const containerClass = compact 
-    ? 'p-2 rounded-lg' 
-    : 'p-3 rounded-lg';
+    ? 'p-3 rounded-2xl' 
+    : 'p-4 rounded-2xl';
   
   const textClass = compact 
-    ? 'text-xs font-medium' 
-    : 'text-sm font-semibold';
+    ? 'text-xs font-semibold' 
+    : 'text-sm font-bold';
 
   return (
     <View 
-      className={`${containerClass} shadow-sm`}
+      className={`${containerClass} shadow-sm border border-white/20`}
       style={{ backgroundColor: garbageType.color_hex }}
     >
       <Text 

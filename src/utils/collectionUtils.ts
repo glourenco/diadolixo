@@ -1,4 +1,4 @@
-import { addWeeks, isAfter, isBefore, startOfDay } from 'date-fns';
+import { addWeeks, isAfter, isBefore, startOfDay, startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns';
 import { CollectionSchedule, GarbageType, CollectionDay, WeeklyCollection } from '../types';
 import { getWeekDates } from './dateUtils';
 
@@ -7,42 +7,89 @@ export const getCollectionsForDate = (
   schedules: CollectionSchedule[],
   garbageTypes: GarbageType[]
 ): GarbageType[] => {
+  // Use local timezone for day calculation
   const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, etc.
   const targetDate = startOfDay(date);
   
   const collections: GarbageType[] = [];
   
+  console.log(`Checking collections for ${date.toDateString()} (day ${dayOfWeek})`);
+  
   schedules.forEach(schedule => {
+    console.log(`Schedule: day_of_week=${schedule.day_of_week}, week_interval=${schedule.week_interval}, active=${schedule.is_active}`);
+    
     if (!schedule.is_active || schedule.day_of_week !== dayOfWeek) {
       return;
     }
     
+    // Parse dates in local timezone to avoid UTC issues
+    const startDateParts = schedule.start_date.split('-');
+    const startDate = new Date(parseInt(startDateParts[0]), parseInt(startDateParts[1]) - 1, parseInt(startDateParts[2]));
+    const targetDateLocal = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    
     // Check if date is within schedule range
-    const startDate = startOfDay(new Date(schedule.start_date));
-    if (isBefore(targetDate, startDate)) {
+    if (isBefore(targetDateLocal, startDate)) {
+      console.log(`Date ${targetDateLocal.toDateString()} is before start date ${startDate.toDateString()}`);
       return;
     }
     
     if (schedule.end_date) {
-      const endDate = startOfDay(new Date(schedule.end_date));
-      if (isAfter(targetDate, endDate)) {
+      const endDateParts = schedule.end_date.split('-');
+      const endDate = new Date(parseInt(endDateParts[0]), parseInt(endDateParts[1]) - 1, parseInt(endDateParts[2]));
+      if (isAfter(targetDateLocal, endDate)) {
+        console.log(`Date ${targetDateLocal.toDateString()} is after end date ${endDate.toDateString()}`);
         return;
       }
     }
     
-    // Check week interval
-    const weeksSinceStart = Math.floor(
-      (targetDate.getTime() - startDate.getTime()) / (7 * 24 * 60 * 60 * 1000)
-    );
-    
-    if (weeksSinceStart % schedule.week_interval === 0) {
-      const garbageType = garbageTypes.find(gt => gt.id === schedule.garbage_type_id);
-      if (garbageType) {
-        collections.push(garbageType);
+    // For week_interval = 2, we need to check if we're on the right alternating week
+    if (schedule.week_interval === 2) {
+      // Use a more reliable week calculation using ISO weeks
+      const getISOWeek = (date: Date) => {
+        const tempDate = new Date(date.getTime());
+        const dayNum = (date.getDay() + 6) % 7;
+        tempDate.setDate(tempDate.getDate() - dayNum + 3);
+        const firstThursday = tempDate.valueOf();
+        tempDate.setMonth(0, 1);
+        if (tempDate.getDay() !== 4) {
+          tempDate.setMonth(0, 1 + ((4 - tempDate.getDay()) + 7) % 7);
+        }
+        return 1 + Math.ceil((firstThursday - tempDate.valueOf()) / 604800000);
+      };
+      
+      const startWeek = getISOWeek(startDate);
+      const targetWeek = getISOWeek(targetDateLocal);
+      const weeksSinceStart = targetWeek - startWeek;
+      
+      console.log(`Start week: ${startWeek}, Target week: ${targetWeek}, Weeks since start: ${weeksSinceStart}, week_interval: ${schedule.week_interval}, start: ${startDate.toDateString()}, target: ${targetDateLocal.toDateString()}`);
+      
+      // For alternating weeks, check if we're on the right week
+      if (weeksSinceStart % 2 === 0) {
+        const garbageType = garbageTypes.find(gt => gt.id === schedule.garbage_type_id);
+        if (garbageType) {
+          console.log(`Adding ${garbageType.name_pt} for alternating week (week ${weeksSinceStart})`);
+          collections.push(garbageType);
+        }
+      }
+    } else {
+      // For weekly collections, check if we're on the right week interval
+      const weeksSinceStart = Math.floor(
+        (targetDateLocal.getTime() - startDate.getTime()) / (7 * 24 * 60 * 60 * 1000)
+      );
+      
+      console.log(`Weeks since start: ${weeksSinceStart}, week_interval: ${schedule.week_interval}`);
+      
+      if (weeksSinceStart % schedule.week_interval === 0) {
+        const garbageType = garbageTypes.find(gt => gt.id === schedule.garbage_type_id);
+        if (garbageType) {
+          console.log(`Adding ${garbageType.name_pt} for weekly collection`);
+          collections.push(garbageType);
+        }
       }
     }
   });
   
+  console.log(`Found ${collections.length} collections for ${date.toDateString()}`);
   return collections;
 };
 
@@ -60,6 +107,26 @@ export const getWeeklyCollections = (
   
   return {
     week: weekDates,
+    collections
+  };
+};
+
+export const getMonthlyCollections = (
+  monthStart: Date,
+  schedules: CollectionSchedule[],
+  garbageTypes: GarbageType[]
+): WeeklyCollection => {
+  const monthStartDate = startOfMonth(monthStart);
+  const monthEndDate = endOfMonth(monthStart);
+  const monthDates = eachDayOfInterval({ start: monthStartDate, end: monthEndDate });
+  
+  const collections: CollectionDay[] = monthDates.map(date => ({
+    date,
+    garbageTypes: getCollectionsForDate(date, schedules, garbageTypes)
+  }));
+  
+  return {
+    week: monthDates,
     collections
   };
 };

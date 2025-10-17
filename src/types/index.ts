@@ -5,6 +5,7 @@ export interface City {
   name_en: string;
   name_es: string;
   country_code: string;
+  zones: Zone[];
 }
 
 export interface Zone {

@@ -10,11 +10,17 @@ export default function TabLayout() {
     <NativeTabs
       labelStyle={{
         color: DynamicColorIOS({
-          dark: 'white',
-          light: 'black',
+          dark: '#FFFFFF',
+          light: '#1D1D1F',
         }),
+        fontSize: 12,
+        fontWeight: '500',
       }}
-      tintColor="#3B82F6"
+      tintColor="#007AFF"
+      backgroundColor={DynamicColorIOS({
+        dark: '#1C1C1E',
+        light: '#F2F2F7',
+      })}
     >
       <NativeTabs.Trigger name="index">
         <Label>{t('navigation.calendar', 'Calendar')}</Label>
